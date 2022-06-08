@@ -15,6 +15,8 @@ html {
 body {
   background-color: #327fa8;
   font-family: 'Merriweather', serif;
+  text-align: center;
+  color: #cadbe4;
 }
 
 .title {
@@ -23,6 +25,7 @@ body {
   line-height: 1.5em;
   text-align: center;
   color: #cadbe4;
+  margin-bottom: 2rem;
 }
 
 .wrapper {
@@ -36,6 +39,62 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+form {
+  margin-bottom: 2rem;
+}
+
+label {
+  font-size: 1.5rem;
+  line-height: 1.5em;
+}
+
+input {
+  width: 100px;
+  height: 25px;
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  padding: 2px;
+  background-color: #113447;
+  color: #eee;
+}
+
+::-webkit-input-placeholder {
+  color: #cadbe4;
+}
+
+:-ms-input-placeholder {
+  color: #cadbe4;
+}
+
+::-ms-input-placeholder {
+  color: #cadbe4;
+}
+
+::placeholder {
+  color: #cadbe4;
+}
+
+button {
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  background-color: #cadbe4;
+  color: #113447;
+  height: 25px;
+  padding: 2px 5px;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+button:active {
+  background-color: #113447;
+  color: #cadbe4;
 }
 
 .field {

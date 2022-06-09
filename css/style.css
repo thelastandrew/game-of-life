@@ -41,7 +41,8 @@ body {
           align-items: center;
 }
 
-form {
+form,
+.controls {
   margin-bottom: 2rem;
 }
 
@@ -84,15 +85,19 @@ button {
   outline: none;
   border: none;
   background-color: #cadbe4;
-  color: #113447;
+  color: #a5a5a5;
   height: 25px;
   padding: 2px 5px;
-  cursor: pointer;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
 
-button:active {
+button.btn--active {
+  color: #113447;
+  cursor: pointer;
+}
+
+button.btn--active:active {
   background-color: #113447;
   color: #cadbe4;
 }

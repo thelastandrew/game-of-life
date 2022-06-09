@@ -14,10 +14,15 @@
 <body>
   <h1 class="title">Conway's Game of Life</h1>
   <form>
-    <label>Please, enter width and height <input type="number" id="field-width" placeholder="Width" min="10"> <input
+    <label>Please, enter width and height<br><input type="number" id="field-width" placeholder="Width" min="10"> <input
         type="number" id="field-height" placeholder="Height" min="10"></label>
-    <button type="button">Submit</button>
+    <button class="btn--active" type="button">Submit</button>
   </form>
+  <div class="controls">
+    <button class="controls__start btn--active">Start Life</button>
+    <button class="controls__stop">Stop Life</button>
+    <button class="controls__clear">Clear field</button>
+  </div>
   <canvas class="field">Your browser doesn't support canvas!</canvas>
   <script src="./app.js"></script>
 </body>

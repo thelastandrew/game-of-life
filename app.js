@@ -124,3 +124,38 @@ function stop() {
     cancelAnimationFrame(req);
   }
 }
+
+const startBtn = document.querySelector('.controls__start');
+const stopBtn = document.querySelector('.controls__stop');
+const clearBtn = document.querySelector('.controls__clear');
+
+startBtn.addEventListener('click', startGame);
+
+function startGame() {
+  startBtn.classList.remove('btn--active');
+  clearBtn.classList.remove('btn--active');
+  submitBtn.classList.remove('btn--active');
+  stopBtn.classList.add('btn--active');
+  startBtn.removeEventListener('click', startGame);
+  clearBtn.removeEventListener('click', clearField);
+  stopBtn.addEventListener('click', stopGame);
+  start();
+}
+
+function stopGame() {
+  stopBtn.classList.remove('btn--active');
+  startBtn.classList.add('btn--active');
+  clearBtn.classList.add('btn--active');
+  submitBtn.classList.add('btn--active');
+  stopBtn.removeEventListener('click', stopGame);
+  startBtn.addEventListener('click', startGame);
+  clearBtn.addEventListener('click', clearField);
+  stop();
+}
+
+function clearField() {
+  clearBtn.classList.remove('btn--active');
+  clearBtn.removeEventListener('click', clearField);
+  fillRect();
+  createLife();
+}

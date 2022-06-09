@@ -1,6 +1,6 @@
 const field = document.querySelector('.field');
 const ctx = field.getContext('2d');
-const submitBtn = document.querySelector('button');
+
 field.width = 500;
 field.height = 500;
 const cellRes = 10;
@@ -10,22 +10,6 @@ let gen = [];
 const per = 5;
 fillRect();
 createLife();
-
-submitBtn.onclick = function () {
-  const fieldWidth = document.getElementById('field-width').value;
-  const fieldHeight = document.getElementById('field-height').value;
-  if (fieldWidth && fieldHeight) {
-    field.width = fieldWidth * cellRes;
-    field.height = fieldHeight * cellRes;
-    rows = fieldHeight;
-    cols = fieldWidth;
-    document.getElementById('field-width').value = '';
-    document.getElementById('field-height').value = '';
-    stop();
-    fillRect();
-    createLife();
-  }
-};
 
 function fillRect() {
   ctx.clearRect(0, 0, field.width, field.height);
@@ -125,10 +109,28 @@ function stop() {
   }
 }
 
+const submitBtn = document.querySelector('button');
 const startBtn = document.querySelector('.controls__start');
 const stopBtn = document.querySelector('.controls__stop');
 const clearBtn = document.querySelector('.controls__clear');
 
+function setMeasures() {
+  const fieldWidth = document.getElementById('field-width').value;
+  const fieldHeight = document.getElementById('field-height').value;
+  if (fieldWidth && fieldHeight) {
+    field.width = fieldWidth * cellRes;
+    field.height = fieldHeight * cellRes;
+    rows = fieldHeight;
+    cols = fieldWidth;
+    document.getElementById('field-width').value = '';
+    document.getElementById('field-height').value = '';
+    stop();
+    fillRect();
+    createLife();
+  }
+}
+
+submitBtn.addEventListener('click', setMeasures);
 startBtn.addEventListener('click', startGame);
 
 function startGame() {
@@ -138,6 +140,7 @@ function startGame() {
   stopBtn.classList.add('btn--active');
   startBtn.removeEventListener('click', startGame);
   clearBtn.removeEventListener('click', clearField);
+  submitBtn.removeEventListener('click', setMeasures);
   stopBtn.addEventListener('click', stopGame);
   start();
 }
@@ -148,6 +151,7 @@ function stopGame() {
   clearBtn.classList.add('btn--active');
   submitBtn.classList.add('btn--active');
   stopBtn.removeEventListener('click', stopGame);
+  submitBtn.addEventListener('click', setMeasures);
   startBtn.addEventListener('click', startGame);
   clearBtn.addEventListener('click', clearField);
   stop();

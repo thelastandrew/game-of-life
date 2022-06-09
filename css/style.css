@@ -105,5 +105,6 @@ button.btn--active:active {
 .field {
   display: block;
   margin: 0 auto;
+  cursor: url("../assets/png/pen.png"), pointer;
 }
 /*# sourceMappingURL=style.css.map */

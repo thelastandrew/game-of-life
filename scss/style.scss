@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #327fa8;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  color: #cadbe4;
+}
+
+.title {
+  font-size:3rem;
+  font-weight: 700;
+  line-height: 1.5em;
+  text-align: center;
+  color: #cadbe4;
+  margin-bottom: 2rem;
+}
+
+.wrapper {
+  min-height: calc(100vh - 4.5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form,
+.controls {
+  margin-bottom: 2rem;
+}
+
+label {
+  font-size: 1.5rem;
+  line-height: 1.5em;
+}
+
+input {
+  width: 100px;
+  height: 25px;
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  padding: 2px;
+  background-color: #113447;
+  color: #eee
+}
+
+::placeholder {
+  color: #cadbe4;
+}
+
+button {
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+  outline: none;
+  border: none;
+  background-color: #cadbe4;
+  color:#a5a5a5;
+  height: 25px;
+  padding: 2px 5px;
+  transition: 0.2s;
+
+  &.btn--active {
+    color:#113447;
+    cursor: pointer;
+
+    &:active{
+      background-color: #113447;
+      color: #cadbe4;
+    }
+
+  }
+
+
+}
+
+.field {
+  display: block;
+  margin: 0 auto;
+  cursor: url('../assets/png/pen.png'), pointer;
+}

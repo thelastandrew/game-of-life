@@ -106,11 +106,18 @@ function co(i, edge) {
 }
 
 let timer = 0;
+let req = null;
 function start() {
   timer++;
   if (timer === freq) {
     updateGen();
     timer = 0;
   }
-  requestAnimationFrame(start);
+  req = requestAnimationFrame(start);
+}
+
+function stop() {
+  if (req) {
+    cancelAnimationFrame(req);
+  }
 }

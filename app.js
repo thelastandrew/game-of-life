@@ -7,7 +7,7 @@ const cellRes = 10;
 let rows = field.height / cellRes;
 let cols = field.width / cellRes;
 let gen = [];
-const freq = 10;
+const per = 5;
 fillRect();
 createLife();
 
@@ -17,11 +17,14 @@ submitBtn.onclick = function () {
   if (fieldWidth && fieldHeight) {
     field.width = fieldWidth * cellRes;
     field.height = fieldHeight * cellRes;
+    rows = fieldHeight;
+    cols = fieldWidth;
+    document.getElementById('field-width').value = '';
+    document.getElementById('field-height').value = '';
+    stop();
+    fillRect();
+    createLife();
   }
-  rows = fieldHeight;
-  cols = fieldWidth;
-  fillRect();
-  createLife();
 };
 
 function fillRect() {
@@ -109,7 +112,7 @@ let timer = 0;
 let req = null;
 function start() {
   timer++;
-  if (timer === freq) {
+  if (timer === per) {
     updateGen();
     timer = 0;
   }

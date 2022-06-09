@@ -7,6 +7,7 @@ const cellRes = 10;
 let rows = field.height / cellRes;
 let cols = field.width / cellRes;
 let gen = [];
+const freq = 10;
 fillRect();
 createLife();
 
@@ -63,7 +64,7 @@ function drawCell() {
   }
 }
 
-function start() {
+function updateGen() {
   let nextGen = [];
   for (let i = 0; i < rows; i++) {
     nextGen[i] = [];
@@ -90,7 +91,6 @@ function start() {
 
   gen = nextGen;
   drawCell();
-  requestAnimationFrame(start);
 }
 
 // check under edge
@@ -103,4 +103,14 @@ function cu(i, edge) {
 function co(i, edge) {
   if (i === edge - 1) return -1;
   else return i;
+}
+
+let timer = 0;
+function start() {
+  timer++;
+  if (timer === freq) {
+    updateGen();
+    timer = 0;
+  }
+  requestAnimationFrame(start);
 }

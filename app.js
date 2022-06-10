@@ -1,11 +1,21 @@
 const field = document.querySelector('.field');
 const ctx = field.getContext('2d');
+const inputWidth = document.getElementById('field-width');
+const inputHeight = document.getElementById('field-height');
 
-field.width = 500;
-field.height = 500;
+// colors
+const dark = '#113447';
+const light = '#327fa8';
+const cell = '#d8c943';
+
 const cellRes = 10;
-let rows = field.height / cellRes;
-let cols = field.width / cellRes;
+
+// default measures
+let rows = 50;
+let cols = 50;
+
+field.width = cols * cellRes + cols - 1;
+field.height = rows * cellRes + rows - 1;
 let gen = [];
 const per = 5;
 fillRect();
@@ -13,15 +23,39 @@ createLife();
 
 function fillRect() {
   ctx.clearRect(0, 0, field.width, field.height);
-  ctx.fillStyle = '#113447';
+  ctx.fillStyle = dark;
   ctx.fillRect(0, 0, field.width, field.height);
+  drawHorizontalLines();
+  drawVerticalLines();
+}
+
+function drawHorizontalLines() {
+  for (let i = 1; i < rows; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, i * cellRes + i);
+    ctx.lineTo(field.width, i * cellRes + i);
+    ctx.strokeStyle = light;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+}
+
+function drawVerticalLines() {
+  for (let i = 1; i < cols; i++) {
+    ctx.beginPath();
+    ctx.moveTo(i * cellRes + i, 0);
+    ctx.lineTo(i * cellRes + i, field.height);
+    ctx.strokeStyle = light;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
 }
 
 field.onclick = function (e) {
   let x = e.offsetX;
   let y = e.offsetY;
-  x = Math.floor(x / 10);
-  y = Math.floor(y / 10);
+  x = Math.floor((x - (Math.floor(x / 10) - 1)) / 10);
+  y = Math.floor((y - (Math.floor(y / 10) - 1)) / 10);
   if (gen[y][x] === 0) {
     gen[y][x] = 1;
   } else {
@@ -31,6 +65,7 @@ field.onclick = function (e) {
 };
 
 function createLife() {
+  gen = [];
   for (let i = 0; i < rows; i++) {
     gen[i] = [];
     for (let j = 0; j < cols; j++) {
@@ -44,8 +79,8 @@ function drawCell() {
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       if (gen[i][j] === 1) {
-        ctx.fillStyle = '#d8c943';
-        ctx.fillRect(j * cellRes, i * cellRes, cellRes, cellRes);
+        ctx.fillStyle = cell;
+        ctx.fillRect(j * cellRes + j, i * cellRes + i, cellRes, cellRes);
       }
     }
   }
@@ -115,15 +150,13 @@ const stopBtn = document.querySelector('.controls__stop');
 const clearBtn = document.querySelector('.controls__clear');
 
 function setMeasures() {
-  const fieldWidth = document.getElementById('field-width').value;
-  const fieldHeight = document.getElementById('field-height').value;
-  if (fieldWidth && fieldHeight) {
-    field.width = fieldWidth * cellRes;
-    field.height = fieldHeight * cellRes;
-    rows = fieldHeight;
-    cols = fieldWidth;
-    document.getElementById('field-width').value = '';
-    document.getElementById('field-height').value = '';
+  if (inputWidth.value && inputHeight.value) {
+    cols = Number(inputWidth.value);
+    rows = Number(inputHeight.value);
+    field.width = cols * cellRes + cols - 1;
+    field.height = rows * cellRes + rows - 1;
+    inputWidth.value = '';
+    inputHeight.value = '';
     stop();
     fillRect();
     createLife();
